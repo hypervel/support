@@ -1608,6 +1608,10 @@ class Str
      */
     public static function ucwords(string $string, string $separators = " \t\r\n\f\v"): string
     {
+        if ($separators === '') {
+            return static::ucfirst($string);
+        }
+
         $pattern = '/(^|[' . preg_quote($separators, '/') . '])(\p{Ll})/u';
 
         return preg_replace_callback($pattern, function ($matches) {
